@@ -1,0 +1,550 @@
+{% extends 'base.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Bot</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;1,100;1,200;1,300;1,400;1,500&display=swap" rel="stylesheet">
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous"> -->
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    <!--Get your own code at fontawesome.com-->
+    <link rel="stylesheet" href="static/css/chat.css">
+    <link rel="stylesheet" href="static/css/home.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+       
+       #body{
+        background-color:white;
+       }
+    
+        .ok{
+            color: white;
+            font-size:40px;
+            font-weight:bold;
+        }
+        .oki{
+            color: white;
+            font-size:20px;
+           
+        }
+       
+    .grid1{
+        box-shadow:15px 15px 20px black;
+        overflow:hidden;
+        transition:1s;
+    }
+    .grid1:hover{
+        transform:scale(1.3);
+    }
+    .grid2{
+        box-shadow:15px 15px 20px black;
+        overflow:hidden;
+        transition:1s;
+    }
+    .grid2:hover{
+        transform:scale(1.3);
+    }.grid3{
+        box-shadow:15px 15px 20px black;
+        overflow:hidden;
+        transition:1s;
+    }
+    .grid3:hover{
+        transform:scale(1.3);
+    }.grid4{
+        box-shadow:15px 15px 20px black;
+        overflow:hidden;
+        transition:1s;
+    }
+    .grid4:hover{
+        transform:scale(1.3);
+    }.grid5{
+        box-shadow:15px 15px 20px black;
+        overflow:hidden;
+        transition:1s;
+    }
+    .grid5:hover{
+        transform:scale(1.3);
+    }.grid6{
+        box-shadow:15px 15px 20px black;
+        overflow:hidden;
+        transition:1s;
+    }
+    .grid6:hover{
+        transform:scale(1.3);
+    }
+    #image-container{
+        width:1500px;
+        height:602px;
+        border:1px solid #000;
+        background-image:url(https://img.freepik.com/premium-photo/top-view-laptop-concept-with-blue-desk-concept-background-3d-rendering_626958-393.jpg);
+        background-repeat:no-repeat;
+        background-size:100% 100%;
+    }
+    span {
+        content: "\2192";
+      }
+  .chat-bar-collapsible {
+        position: fixed;
+        bottom: 0;
+        right: 50px;
+        box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0.2);
+
+    }
+    
+    .collapsible {
+        background-color: rgb(82, 151, 255);
+        color: white;
+        cursor: pointer;
+        padding: 18px;
+        width: 350px;
+        text-align: left;
+        outline: none;
+        font-size: 18px;
+        border-radius: 10px 10px 0px 0px;
+        border: 3px solid white;
+        border-bottom: none;
+    }
+    
+   
+    .full-chat-block {
+        width: 350px;
+        background: white;
+        text-align: center;
+        overflow: auto;
+        scrollbar-width: none;
+        height: max-content;
+        transition: max-height 0.2s ease-out;
+    }
+    
+    .outer-container {
+        min-height: 200px;
+        bottom: 0%;
+        position: relative;
+    }
+    
+    .chat-container {
+        max-height: 200px;
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        scroll-behavior: smooth;
+        hyphens: auto;
+    }
+    
+    .chat-container::-webkit-scrollbar {
+        display: none;
+    }
+    
+    .chat-bar-input-block {
+        display: flex;
+        float: left;
+        box-sizing: border-box;
+        justify-content: space-between;
+        width: 100%;
+        align-items: center;
+        background-color: rgb(235, 235, 235);
+        border-radius: 10px 10px 0px 0px;
+        padding: 10px 0px 10px 10px;
+    }
+    
+    .chat-bar-icons {
+        display: flex;
+        justify-content: space-evenly;
+        box-sizing: border-box;
+        width: 25%;
+        float: right;
+        font-size: 20px;
+    }
+    
+    #chat-icon:hover {
+        opacity: .7;
+    }
+    
+    /* Chat bubbles */
+    
+    #userInput {
+        width: 75%;
+    }
+    
+    .input-box {
+        float: left;
+        border: none;
+        box-sizing: border-box;
+        width: 100%;
+        border-radius: 10px;
+        padding: 10px;
+        font-size: 16px;
+        color: #000;
+        background-color: white;
+        outline: none
+    }
+    
+    .userText {
+        color: white;
+        font-family: Helvetica;
+        font-size: 16px;
+        font-weight: normal;
+        text-align: right;
+        clear: both;
+    }
+    
+    .userText span {
+        line-height: 1.5em;
+        display: inline-block;
+        background: #5ca6fa;
+        padding: 10px;
+        border-radius: 8px;
+        border-bottom-right-radius: 2px;
+        max-width: 80%;
+        margin-right: 10px;
+        animation: floatup .5s forwards
+    }
+    
+    .botText {
+        color: #000;
+        font-family: Helvetica;
+        font-weight: normal;
+        font-size: 16px;
+        text-align: left;
+    }
+    
+    .botText span {
+        line-height: 1.5em;
+        display: inline-block;
+        background: #e0e0e0;
+        padding: 10px;
+        border-radius: 8px;
+        border-bottom-left-radius: 2px;
+        max-width: 80%;
+        margin-left: 10px;
+        animation: floatup .5s forwards
+    }
+    
+    @keyframes floatup {
+        from {
+            transform: translateY(14px);
+            opacity: .0;
+        }
+        to {
+            transform: translateY(0px);
+            opacity: 1;
+        }
+    }
+    
+    @media screen and (max-width:600px) {
+        .full-chat-block {
+            width: 100%;
+            border-radius: 0px;
+        }
+        .chat-bar-collapsible {
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            width: 100%;
+        }
+        .collapsible {
+            width: 100%;
+            border: 0px;
+            border-top: 3px solid white;
+            border-radius: 0px;
+        }
+    }  
+</style>
+
+</head>
+    <script>
+        // Collapsible
+var coll = document.getElementsByClassName("collapsible");
+
+for (let i = 0; i < coll.length; i++) {
+    coll[i].addEventListener("click", function () {
+        this.classList.toggle("active");
+
+        var content = this.nextElementSibling;
+
+        if (content.style.maxHeight) {
+            content.style.maxHeight = null;
+        } else {
+            content.style.maxHeight = content.scrollHeight + "px";
+        }
+
+    });
+}
+
+function getTime() {
+    let today = new Date();
+    hours = today.getHours();
+    minutes = today.getMinutes();
+
+    if (hours < 10) {
+        hours = "0" + hours;
+    }
+
+    if (minutes < 10) {
+        minutes = "0" + minutes;
+    }
+
+    let time = hours + ":" + minutes;
+    return time;
+}
+
+// Gets the first message
+function firstBotMessage() {
+    let firstMessage = "How's it going?"
+    document.getElementById("botStarterMessage").innerHTML = '<p class="botText"><span>' + firstMessage + '</span></p>';
+
+    let time = getTime();
+
+    $("#chat-timestamp").append(time);
+    document.getElementById("userInput").scrollIntoView(false);
+}
+
+firstBotMessage();
+
+// Retrieves the response
+function getHardResponse(userText) {
+    let botResponse = getBotResponse(userText);
+    let botHtml = '<p class="botText"><span>' + botResponse + '</span></p>';
+    $("#chatbox").append(botHtml);
+
+    document.getElementById("chat-bar-bottom").scrollIntoView(true);
+}
+
+//Gets the text text from the input box and processes it
+function getResponse() {
+    let userText = $("#textInput").val();
+
+    if (userText == "") {
+        userText = "I love Code Palace!";
+    }
+
+    let userHtml = '<p class="userText"><span>' + userText + '</span></p>';
+
+    $("#textInput").val("");
+    $("#chatbox").append(userHtml);
+    document.getElementById("chat-bar-bottom").scrollIntoView(true);
+
+    setTimeout(() => {
+        getHardResponse(userText);
+    }, 1000)
+
+}
+
+// Handles sending text via button clicks
+function buttonSendText(sampleText) {
+    let userHtml = '<p class="userText"><span>' + sampleText + '</span></p>';
+
+    $("#textInput").val("");
+    $("#chatbox").append(userHtml);
+    document.getElementById("chat-bar-bottom").scrollIntoView(true);
+
+    //Uncomment this if you want the bot to respond to this buttonSendText event
+    // setTimeout(() => {
+    //     getHardResponse(sampleText);
+    // }, 1000)
+}
+
+function sendButton() {
+    getResponse();
+}
+
+function heartButton() {
+    buttonSendText("Heart clicked!")
+}
+
+// Press enter to send a message
+$("#textInput").keypress(function (e) {
+    if (e.which == 53) {
+        getResponse();
+    }
+});
+function getBotResponse(input) {
+    //rock paper scissors
+    if (input == "rock") {
+        return "paper";
+    } else if (input == "paper") {
+        return "scissors";
+    } else if (input == "scissors") {
+        return "rock";
+    }
+
+    // Simple responses
+    if (input == "hello") {
+        return "Hello there!";
+    } else if (input == "goodbye") {
+        return "Talk to you later!";
+    } else if (input == "hi") {
+        return "hi there";
+    } else if (input == "csd") {
+        return "Computer Science and Design";
+    } else if (input == "what is mean by csd") {
+        return "Computer Science and Design";
+    } else if (input == "what is csd") {
+        return "Computer Science and Design";
+    } else if (input == "hod" ) {
+        return "Thangaramya";
+    } else if (input == "in which year csd inaugrated" ) {
+        return "hi there";
+    } 
+    else {
+        return "click the search in the website to know information,Try asking something else!";
+    }
+}
+    </script>
+</head>
+<body>
+    <!-- CHAT BAR BLOCK -->
+      <!--<div class="chat-bar-collapsible">
+        <button id="chat-button" type="button" class="collapsible">Chat with us!
+            <i id="chat-icon" style="color: #fff;" class="fa fa-fw fa-comments-o"></i>
+        </button>
+        <div class="content">
+            <div class="full-chat-block">
+                <!-- Message Container -->
+               <!-- <div class="outer-container">
+                    <div class="chat-container">
+                        <!-- Messages -->
+                      <!--  <div id="chatbox">
+                            <h5 id="chat-timestamp"></h5>
+                            <p id="botStarterMessage" class="botText"><span>Loading...</span></p>
+                        </div>
+
+                        <!-- User input box -->
+                       <!-- <div class="chat-bar-input-block">
+                            <div id="userInput">
+                                <input id="textInput" class="input-box" type="text" name="msg"
+                                    placeholder="search here">
+                                <p></p>
+                            </div>
+
+                            <div class="chat-bar-icons">
+                                <i id="chat-icon" style="color: crimson;" class="fa fa-fw fa-heart"
+                                    onclick="heartButton()"></i>
+                                <i id="chat-icon" style="color: #333;" class="fa fa-fw fa-send"
+                                    onclick="sendButton()"></i>
+                      <!--      </div>
+                        </div>
+
+                        <div id="chat-bar-bottom">
+                            <p></p>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div> -->
+    <div id="image-container">
+    <section class=""style="height:170vh;">
+  
+        <h2 class="ok"style="margin-top:210px;margin-left:90px;text-color:white;">Welcome , {{username}}
+      
+        </h2>
+        <h2 class="oki" style="text-colour:white;margin-left:130px;"> Seek information about</h2>
+            <h2 class="oki" style="text-colour:white;margin-left:100px;">COMPUTER SCIENCE AND DESIGN</h2>
+        <h3 style="color:grey;margin-left:190px;">(click search)</h3>   
+        
+     
+        <div class="hero-options">
+         
+         <a style="margin-left:190px;"href="{% url 'stackbase:question-list' %}" class="btn btn-developers" style="margin-left: 5px;">SEARCH</a>
+    
+        </div>
+  
+</div>
+</div>
+ 
+    
+
+
+
+<section style="background-color:white;margin-top:110px;margin-left:350px;margin-right:350px;margin-bottom:100px;" class="for-developers">
+   <div class="container">
+       <div class="section-head">
+           <h2 class="section-title">COMPUTER SCIENCE AND DESIGN
+           </h2>
+           <br>
+           <br>
+           <div class="section-line"></div>
+           <p class="section-description">The Department of Computer Science and Design was established in the year 2021, with Mindtree as its knowledge partner to offer an industry relevant program.The Department has well qualified, highly experienced and dedicated team of faculty trained in the recent trends of Computer Science and Design.
+           </p>
+          
+       </div>
+
+</div>
+
+</section>
+
+
+
+<section style="background-color:#E1EBEE" class="questions">
+    <div class="container">
+       <div class="questions-content">
+           <div class="questions-header">
+               <h3 class="question-title">Questions are everywhere, answers are on KM portal</h3>
+           </div>
+           <div class="questions-body">
+               <div class="questions-body-items">
+                   <div class="questions-body-item" data-id="0">
+                       <img src="https://cdn.sstatic.net/Img/home/ask-a-question.svg?v=f4f2050b0297" alt="" class="question-item-icon">
+                       <div class="question-item-text">Ask a question</div>
+                       <div class="question-arrow-right"></div>
+                   </div>
+                   <div class="questions-body-item"  data-id="1">
+                       <img src="https://cdn.sstatic.net/Img/home/votes.svg?v=748a8f48a8e2" alt="" class="question-item-icon">
+                       <div class="question-item-text">Vote on everything</div>
+                       <div class="question-arrow-right"></div>
+                   </div >
+                   <div class="questions-body-item"  data-id="2">
+                       <img src="https://cdn.sstatic.net/Img/home/answer.svg?v=4cd8048a676c" alt="" class="question-item-icon">
+                       <div class="question-item-text">Answer questions</div>
+                       <div class="question-arrow-right"></div>
+                   </div>
+               </div>
+               <div class="questions-body-item-content">
+                   <img src="https://cdn.sstatic.net/Img/home/illo-feats-vote.svg?v=9d2eb0efdc17" alt="" class="question-item-content-img">
+                   <h4 class="question-item-content-text">
+                       Accept the answer which solved your problem to let others benefit from the valuable information.
+                   </h4>
+                   
+               </div>
+               <div class="questions-body-items">
+                   <div class="questions-body-item"  data-id="3">
+                       <img src="https://cdn.sstatic.net/Img/home/tags.svg?v=913379eb09eb" alt="" class="question-item-icon">
+                       <div class="question-item-text">Tag your question</div>
+                       <div class="question-arrow-left"></div>
+                   </div>
+                   <div class="questions-body-item"  data-id="4">
+                       <img src="https://cdn.sstatic.net/Img/home/accept.svg?v=27d5be078970" alt="" class="question-item-icon">
+                       <div class="question-item-text">Accept a answer</div>
+                       <div class="question-arrow-left"></div>
+                   </div>
+                   <div class="questions-body-item"  data-id="5">
+                       <img src="https://cdn.sstatic.net/Img/home/get-recognized.svg?v=3b339d9aa10c" alt="" class="question-item-icon">
+                       <div class="question-item-text">Get recognized</div>
+                       <div class="question-arrow-left"></div>
+                   </div>
+               </div>
+           </div>
+          
+                  
+               </div>
+           </div>
+       </div>
+    </div>
+</section>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="static/scripts/responses.js"></script>
+<script src="static/scripts/chat.js"></script>
+
+
+</html>
+{% endblock content %}
